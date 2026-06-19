@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+
+  <title>Birthday Letter 💌</title>
+
+
+  <style>
+
+    :root {
+      color-scheme: light only;
+    }
+
+
+    * {
+
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+
+      min-height: 100vh;
+
+
+      background:
+
+        url("letter1.png")
+
+        center / cover
+
+        no-repeat fixed;
+
+
+
+      font-family:
+
+        cursive, sans-serif;
+
+
+
+      color: black;
+
+
+
+      display:
+
+        flex;
+
+
+
+      justify-content:
+
+        center;
+
+
+
+      align-items:
+
+        center;
+
+
+
+      padding:
+
+        2rem;
+
+
+
+      overflow-x:
+
+        hidden;
+
+
+    }
+
+
+
+
+    .letter {
+
+
+      max-width:
+
+        850px;
+
+
+
+      width:
+
+        100%;
+
+
+
+      padding:
+
+        2rem;
+
+
+
+      text-align:
+
+        center;
+
+
+
+      position:
+
+        relative;
+
+
+
+      z-index:
+
+        1;
+
+
+
+    }
+
+
+
+
+
+    .greeting {
+
+
+      text-align:
+
+        left;
+
+
+
+      font-size:
+
+        clamp(1.5rem, 4vw, 2.5rem);
+
+
+
+      margin-bottom:
+
+        2rem;
+
+      margin-top: 
+        2rem;
+
+
+
+      animation:
+
+        fadeIn 1s ease;
+
+    }
+
+
+
+
+
+
+
+    .message {
+
+
+      font-size:
+
+        clamp(1rem, 2.5vw, 1.4rem);
+
+
+
+      line-height:
+
+        1.8;
+
+
+
+      animation:
+
+        glow 6s infinite alternate;
+
+
+
+    }
+
+
+
+
+
+
+
+    .signature {
+
+
+      text-align:
+
+        right;
+
+
+
+      margin:
+
+        3rem 0;
+
+
+
+      font-size:
+
+        clamp(1.2rem, 3vw, 1.8rem);
+
+
+
+    }
+
+
+
+
+
+
+
+    .ending {
+
+
+      margin-top:
+
+        3rem;
+
+
+
+      font-size:
+
+        clamp(1.5rem, 5vw, 3rem);
+
+
+
+      font-weight:
+
+        bold;
+
+
+
+      opacity:
+
+        0;
+
+
+
+      animation:
+
+        fadeIn 2s ease forwards;
+
+
+
+      animation-delay:
+
+        3s;
+
+
+
+    }
+
+
+
+
+
+
+
+    /* Music */
+
+
+
+    audio {
+
+
+      position:
+
+        fixed;
+
+
+
+      top:
+
+        1rem;
+
+
+
+      right:
+
+        1rem;
+
+
+
+      width:
+
+        min(320px,90vw);
+
+
+
+      z-index:
+
+        10;
+
+
+
+      opacity:
+
+        0;
+
+
+
+      animation:
+
+        fadeIn .8s ease forwards;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* Floating particles */
+
+
+
+    .particle {
+
+
+      position:
+
+        fixed;
+
+
+
+      pointer-events:
+
+        none;
+
+
+
+      font-size:
+
+        1.5rem;
+
+
+
+      opacity:
+
+        0;
+
+
+
+      animation:
+
+        floatUp linear infinite;
+
+
+
+      z-index:
+
+        0;
+
+
+
+    }
+
+
+
+
+
+
+
+    @keyframes floatUp {
+
+
+      0% {
+
+
+        transform:
+
+          translateY(110vh)
+
+          rotate(-10deg);
+
+
+
+        opacity:
+
+          0;
+
+
+
+      }
+
+
+
+
+      10% {
+
+
+        opacity:
+
+          .8;
+
+
+      }
+
+
+
+
+      90% {
+
+
+        opacity:
+
+          .8;
+
+
+      }
+
+
+
+
+      100% {
+
+
+        transform:
+
+          translateY(-10vh)
+
+          rotate(10deg);
+
+
+
+        opacity:
+
+          0;
+
+
+
+      }
+
+
+    }
+
+
+
+
+
+
+
+    @keyframes fadeIn {
+
+
+      from {
+
+
+        opacity:
+
+          0;
+
+
+
+        transform:
+
+          translateY(20px);
+
+
+
+      }
+
+
+
+      to {
+
+
+        opacity:
+
+          1;
+
+
+
+        transform:
+
+          translateY(0);
+
+
+
+      }
+
+
+    }
+
+
+
+
+
+
+
+    @keyframes glow {
+
+
+      from {
+
+
+        text-shadow:
+
+          0 0 5px wheat;
+
+
+
+      }
+
+
+
+      to {
+
+
+        text-shadow:
+
+
+          0 0 20px aqua,
+
+          0 0 30px wheat;
+
+
+
+      }
+
+
+    }
+
+
+
+
+
+
+
+    @media(max-width:600px){
+
+
+      body {
+
+        padding:
+
+          1rem;
+
+      }
+
+
+
+      .letter {
+
+        padding:
+
+          1rem;
+
+      }
+
+
+
+      audio {
+
+        top:
+
+          auto;
+
+
+
+        bottom:
+
+          1rem;
+
+
+
+        right:
+
+          50%;
+
+
+
+        transform:
+
+          translateX(50%);
+
+      }
+
+
+    }
+
+
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+
+<audio
+  id="bg-music"
+  controls
+  loop
+  aria-label="Background music">
+
+
+  <source
+
+    src="Corinne Bailey Rae - Put Your Records On.mp3"
+
+    type="audio/mpeg">
+
+
+</audio>
+
+
+
+
+
+<main class="letter">
+
+
+
+  <h1 class="greeting">
+
+    Hey there 💛
+
+  </h1>
+
+
+
+
+
+  <p class="message">
+
+
+    Today is a reminder to celebrate you,
+
+    everything you have achieved,
+
+    and everything that is still waiting for you.
+
+
+
+    <br><br>
+
+
+
+    Life is full of different chapters,
+
+    new experiences,
+
+    and unexpected moments.
+
+
+
+    I hope you continue to grow,
+
+    dream boldly,
+
+    and always remember how much
+
+    you are capable of.
+
+
+
+    <br><br>
+
+
+
+    May this year bring you happiness,
+
+    success,
+
+    unforgettable memories,
+
+    and people who support you
+
+    through every step.
+
+
+
+  </p>
+
+
+
+
+
+
+  <p class="signature">
+
+
+    With lots of love ❤️
+
+
+  </p>
+
+
+
+
+
+
+  <p class="ending">
+
+
+    Happy Birthday ✨
+
+
+  </p>
+
+
+
+</main>
+
+
+
+
+
+
+<script>
+
+
+// Music persistence
+
+
+const music =
+
+document.getElementById(
+  "bg-music"
+);
+
+
+
+const savedTime =
+
+sessionStorage.getItem(
+  "musicTime"
+);
+
+
+
+if(savedTime){
+
+
+  music.currentTime =
+
+    Number(savedTime);
+
+
+
+  music.play()
+
+    .catch(()=>{});
+
+
+}
+
+
+
+
+
+setInterval(()=>{
+
+
+  sessionStorage.setItem(
+
+    "musicTime",
+
+    music.currentTime
+
+  );
+
+
+},1000);
+
+
+
+
+
+
+
+// Floating particles
+
+
+const emojis = [
+
+
+  "🎈",
+
+  "🎀",
+
+  "🎁",
+
+  "✨",
+
+  "🌸",
+
+  "💛"
+
+
+];
+
+
+
+
+for(let i = 0; i < 12; i++){
+
+
+
+  const particle =
+
+    document.createElement(
+      "div"
+    );
+
+
+
+  particle.className =
+    "particle";
+
+
+
+  particle.textContent =
+
+    emojis[
+      Math.floor(
+        Math.random()
+        *
+        emojis.length
+      )
+    ];
+
+
+
+  particle.style.left =
+
+    `${Math.random()*100}vw`;
+
+
+
+  particle.style.animationDuration =
+
+    `${6 + Math.random()*8}s`;
+
+
+
+  particle.style.animationDelay =
+
+    `${Math.random()*6}s`;
+
+
+
+  document.body.appendChild(
+    particle
+  );
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
+

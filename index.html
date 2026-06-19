@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <title>Birthday Celebration</title>
+
+  <style>
+    :root {
+      color-scheme: light only;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: url("pg1.png") center/cover no-repeat fixed;
+      font-family: cursive, sans-serif;
+      color: black;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      overflow: hidden;
+      position: relative;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .subtitle {
+      font-size: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .title {
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 1;
+    }
+
+    .typing {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid orange;
+      width: 0;
+
+      animation:
+        typing 3s steps(10, end) forwards,
+        blink 0.7s infinite,
+        glow 2s ease-in-out infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 10ch;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px orange;
+      }
+
+      to {
+        text-shadow:
+          0 0 20px yellow,
+          0 0 30px orange;
+      }
+    }
+
+    audio {
+      opacity: 0;
+      animation: fadeIn 0.6s ease 2s forwards;
+    }
+
+    .start-btn {
+      padding: 1rem 2rem;
+      border: 2px solid black;
+      border-radius: 20px;
+
+      background: rgb(241, 216, 69);
+
+      font-family: inherit;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      font-weight: bold;
+
+      cursor: pointer;
+
+      opacity: 0;
+
+      animation: fadeIn 0.6s ease 4s forwards;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+
+      box-shadow:
+        0 6px 20px rgba(241, 180, 0, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) rotate(-10deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.75;
+      }
+
+      90% {
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(-10vh) rotate(10deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="content">
+
+    <h2 class="subtitle">
+      HAPPY BIRTHDAY
+    </h2>
+
+    <h1 class="title">
+      Celebrate!
+    </h1>
+
+    <p class="typing">
+      PRESS PLAY 😁
+    </p>
+
+    <audio
+      id="bg-music"
+      controls
+      loop
+      aria-label="Background music"
+    >
+      <source
+        src="Corinne Bailey Rae - Put Your Records On.mp3"
+        type="audio/mpeg"
+      >
+    </audio>
+
+    <button
+      class="start-btn"
+      onclick="window.location.href='two.html'"
+    >
+      Click to Begin →
+    </button>
+
+  </main>
+
+  <script>
+    // Floating particles
+    const emojis = [
+      "🎈",
+      "🥳",
+      "🎊",
+      "🎀",
+      "🎁",
+      "✨",
+      "🌸",
+      "🍰",
+      "🕯️"
+    ];
+
+    const PARTICLE_COUNT = 20;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const particle =
+        document.createElement("div");
+
+      particle.className = "particle";
+
+      particle.textContent =
+        emojis[Math.floor(
+          Math.random() * emojis.length
+        )];
+
+      particle.style.left =
+        `${Math.random() * 100}vw`;
+
+      particle.style.animationDuration =
+        `${6 + Math.random() * 8}s`;
+
+      particle.style.animationDelay =
+        `${Math.random() * 6}s`;
+
+      document.body.appendChild(particle);
+    }
+
+    // Music persistence
+    const music =
+      document.getElementById("bg-music");
+
+    const savedTime =
+      sessionStorage.getItem("musicTime");
+
+    if (savedTime) {
+      music.currentTime = Number(savedTime);
+
+      music.play().catch(() => {});
+    }
+
+    setInterval(() => {
+      sessionStorage.setItem(
+        "musicTime",
+        music.currentTime
+      );
+    }, 1000);
+  </script>
+
+</body>
+</html>
+

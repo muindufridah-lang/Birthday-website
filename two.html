@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+
+  <title>Birthday Messages 🌸</title>
+
+  <style>
+
+    :root {
+      color-scheme: light only;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      background:
+        url("page2.png")
+        center / cover
+        no-repeat fixed;
+
+      font-family: cursive, sans-serif;
+
+      color: black;
+
+      overflow-x: hidden;
+
+      padding: 2rem;
+
+    }
+
+
+
+    .container {
+
+      position: relative;
+
+      z-index: 1;
+
+      max-width: 800px;
+
+      margin: auto;
+
+      text-align: center;
+
+    }
+
+
+
+    .title {
+
+      font-size:
+        clamp(1.5rem, 5vw, 3rem);
+
+      margin-bottom: 2rem;
+
+
+      animation:
+        glow 2s infinite alternate;
+
+    }
+
+
+
+    /* ------------------
+       Flowers
+    ------------------ */
+
+
+    .garden {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1.5rem;
+
+      margin: 2rem auto;
+
+    }
+
+
+
+    .flower {
+
+      border: none;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      font-size: 3rem;
+
+
+      transition:
+        transform .3s ease,
+        filter .3s ease;
+
+    }
+
+
+
+    .flower:hover {
+
+      transform:
+        scale(1.2)
+        rotate(10deg);
+
+
+      filter:
+        drop-shadow(
+          0 0 10px pink
+        );
+
+    }
+
+
+
+    .flower:nth-child(odd) {
+
+      align-self: flex-start;
+
+    }
+
+
+    .flower:nth-child(even) {
+
+      align-self: flex-end;
+
+    }
+
+
+
+
+    /* ------------------
+       Messages
+    ------------------ */
+
+
+    .message {
+
+      display: none;
+
+
+      background:
+        rgba(255,255,255,.7);
+
+
+      backdrop-filter:
+        blur(5px);
+
+
+      border-radius:
+        20px;
+
+
+      padding:
+        1.2rem;
+
+
+      font-size:
+        clamp(1rem,3vw,1.4rem);
+
+
+      line-height:
+        1.6;
+
+    }
+
+
+
+    .message.show {
+
+      display: block;
+
+      animation:
+        fadeIn .8s ease;
+
+    }
+
+
+
+
+
+    /* ------------------
+       Audio
+    ------------------ */
+
+
+    audio {
+
+      width:
+        min(320px,90%);
+
+
+      margin:
+        2rem auto;
+
+
+      display:
+        block;
+
+    }
+
+
+
+
+    /* ------------------
+       Button
+    ------------------ */
+
+
+    .next-btn {
+
+
+      padding:
+        1rem 2rem;
+
+
+      border:
+
+        2px solid black;
+
+
+      border-radius:
+        20px;
+
+
+      background:
+        rgb(241,216,69);
+
+
+      font-family:
+        inherit;
+
+
+      font-size:
+        clamp(1.2rem,4vw,2rem);
+
+
+      font-weight:
+        bold;
+
+
+      cursor:
+        pointer;
+
+
+
+      transition:
+
+        transform .2s ease,
+
+        box-shadow .2s ease;
+
+    }
+
+
+
+
+    .next-btn:hover {
+
+
+      transform:
+        scale(1.05);
+
+
+      box-shadow:
+
+        0 6px 20px
+
+        rgba(241,180,0,.5);
+
+    }
+
+
+
+
+
+    /* ------------------
+       Particles
+    ------------------ */
+
+
+    .particle {
+
+      position:
+        fixed;
+
+
+      pointer-events:
+        none;
+
+
+      z-index:
+        0;
+
+
+      font-size:
+        1.4rem;
+
+
+      opacity:
+        0;
+
+
+      animation:
+        floatUp linear infinite;
+
+    }
+
+
+
+
+
+    @keyframes floatUp {
+
+
+      0% {
+
+        transform:
+          translateY(110vh)
+          rotate(-10deg);
+
+        opacity:
+          0;
+
+      }
+
+
+
+      10% {
+
+        opacity:
+          .75;
+
+      }
+
+
+
+
+      90% {
+
+        opacity:
+          .8;
+
+      }
+
+
+
+
+      100% {
+
+
+        transform:
+
+          translateY(-10vh)
+
+          rotate(10deg);
+
+
+        opacity:
+          0;
+
+      }
+
+    }
+
+
+
+
+    @keyframes fadeIn {
+
+
+      from {
+
+        opacity:
+          0;
+
+        transform:
+          translateY(15px);
+
+      }
+
+
+
+      to {
+
+
+        opacity:
+          1;
+
+
+        transform:
+          translateY(0);
+
+      }
+
+    }
+
+
+
+
+    @keyframes glow {
+
+
+      from {
+
+        text-shadow:
+          0 0 5px orange;
+
+      }
+
+
+
+      to {
+
+
+        text-shadow:
+
+          0 0 20px yellow,
+
+          0 0 30px orange;
+
+      }
+
+    }
+
+
+
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+<main class="container">
+
+
+  <h1 class="title">
+
+    TAP THE FLOWERS 🌸
+
+  </h1>
+
+
+
+  <section class="garden">
+
+
+    <button class="flower"
+      data-target="message1">
+
+      🌸
+
+    </button>
+
+
+    <div id="message1" class="message">
+
+      Wishing you endless happiness,
+      success, and beautiful memories ✨
+
+    </div>
+
+
+
+
+
+    <button class="flower"
+      data-target="message2">
+
+      🌸
+
+    </button>
+
+
+    <div id="message2" class="message">
+
+      Keep believing in yourself.
+      Your dreams are worth chasing 🌱
+
+    </div>
+
+
+
+
+
+    <button class="flower"
+      data-target="message3">
+
+      🌸
+
+    </button>
+
+
+    <div id="message3" class="message">
+
+      Remember to celebrate yourself
+      and enjoy every moment 🎉
+
+    </div>
+
+
+
+
+
+    <button class="flower"
+      data-target="message4">
+
+      🌸
+
+    </button>
+
+
+    <div id="message4" class="message">
+
+      You are capable of amazing things.
+      Keep shining ✨
+
+    </div>
+
+
+
+
+
+    <button class="flower"
+      data-target="message5">
+
+      🌸
+
+    </button>
+
+
+    <div id="message5" class="message">
+
+      Hope this little surprise
+      brings a smile to your day 💛
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+  <audio
+    id="bg-music"
+    controls
+    loop
+    aria-label="Background music">
+
+    <source
+      src="Corinne Bailey Rae - Put Your Records On.mp3"
+      type="audio/mpeg">
+
+  </audio>
+
+
+
+
+
+  <button
+    class="next-btn"
+
+    onclick="window.location.href='last.html'">
+
+    Next Section →
+
+  </button>
+
+
+
+</main>
+
+
+
+
+<script>
+
+
+// Reveal messages
+
+document
+.querySelectorAll(".flower")
+.forEach(flower => {
+
+
+  flower.addEventListener(
+    "click",
+    () => {
+
+
+      const message =
+
+      document.getElementById(
+
+        flower.dataset.target
+
+      );
+
+
+      message.classList.add(
+        "show"
+      );
+
+
+      flower.remove();
+
+
+    }
+
+  );
+
+
+});
+
+
+
+
+
+// Floating emojis
+
+
+const emojis = [
+
+  "🎈",
+  "🥳",
+  "🎊",
+  "🎀",
+  "🎁",
+  "✨",
+  "🌸"
+
+];
+
+
+
+for(let i = 0; i < 20; i++){
+
+
+  const particle =
+
+  document.createElement(
+    "div"
+  );
+
+
+  particle.className =
+    "particle";
+
+
+  particle.textContent =
+
+    emojis[
+      Math.floor(
+        Math.random()
+        *
+        emojis.length
+      )
+    ];
+
+
+
+  particle.style.left =
+
+    `${Math.random()*100}vw`;
+
+
+
+  particle.style.animationDuration =
+
+    `${6 + Math.random()*8}s`;
+
+
+
+  particle.style.animationDelay =
+
+    `${Math.random()*6}s`;
+
+
+
+  document.body.appendChild(
+    particle
+  );
+
+
+}
+
+
+
+
+
+// Keep music playing between pages
+
+
+const music =
+
+document.getElementById(
+  "bg-music"
+);
+
+
+
+const savedTime =
+
+sessionStorage.getItem(
+  "musicTime"
+);
+
+
+
+if(savedTime){
+
+  music.currentTime =
+    Number(savedTime);
+
+
+  music.play()
+  .catch(()=>{});
+
+}
+
+
+
+setInterval(()=>{
+
+
+  sessionStorage.setItem(
+
+    "musicTime",
+
+    music.currentTime
+
+  );
+
+
+},1000);
+
+
+
+</script>
+
+
+</body>
+
+</html>
+
